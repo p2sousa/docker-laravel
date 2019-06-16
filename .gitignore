@@ -19,3 +19,8 @@ yarn-error.log
 
 ### PhpStorm ###
 .idea/
+
+### Docker ###
+.docker/nginx/log
+.docker/php/log
+.docker/redis
