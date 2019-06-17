@@ -21,8 +21,7 @@ RUN ln -s public html
 
 EXPOSE 9000
 
-COPY ./wait-for.sh /tmp/init_database.sh
-RUN chmod 0777 /tmp/init_database.sh
-
+#COPY ./wait-for.sh /tmp/init_database.sh
+#RUN chmod 0777 /tmp/init_database.sh
 #ENTRYPOINT ["/tmp/init_database.sh", "php-fpm"]
 ENTRYPOINT ["php-fpm"]
