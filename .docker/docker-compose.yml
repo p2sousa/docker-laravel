@@ -10,6 +10,8 @@ services:
     volumes:
       - ../.:/var/www
       - ./php/log:/var/log:rw,cached
+    depends_on:
+      - db
     networks:
       - app-network
 
@@ -23,6 +25,26 @@ services:
     volumes:
       - ../.:/var/www
       - ./nginx/log:/var/log/nginx:rw,cached
+    networks:
+      - app-network
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./database/dumps:/dumps:rw,cached
+      - ./database/data:/var/lib/mysql:rw,cached
+      - ./database/config:/etc/mysql/conf.d:rw,cached
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+    tty: true
+    restart: always
     networks:
       - app-network
 

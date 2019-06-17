@@ -24,3 +24,7 @@ yarn-error.log
 .docker/nginx/log
 .docker/php/log
 .docker/redis
+.docker/database/dumps
+.docker/database/data
+!.docker/database/dumps/.gitkeep
+!.docker/database/data/.gitkeep
