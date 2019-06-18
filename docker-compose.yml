@@ -3,28 +3,30 @@ version: "3"
 services:
 
   app:
-    build: php
+    build: .
     container_name: app
+    expose:
+      - "9000"
     ports:
       - "9000"
     volumes:
-      - ../.:/var/www
-      - ./php/log:/var/log:rw,cached
+      - .:/var/www
+      - ./.docker/php/log:/var/log:rw,cached
     depends_on:
       - db
     networks:
       - app-network
 
   nginx:
-    build: nginx
+    build: ./.docker/nginx
     container_name: nginx
     restart: always
     tty: true
     ports:
       - "8000:80"
     volumes:
-      - ../.:/var/www
-      - ./nginx/log:/var/log/nginx:rw,cached
+      - .:/var/www
+      - ./.docker/nginx/log:/var/log/nginx:rw,cached
     networks:
       - app-network
 
@@ -36,9 +38,9 @@ services:
     expose:
       - "3306"
     volumes:
-      - ./database/dumps:/dumps:rw,cached
-      - ./database/data:/var/lib/mysql:rw,cached
-      - ./database/config:/etc/mysql/conf.d:rw,cached
+      - ./.docker/database/dumps:/dumps:rw,cached
+      - ./.docker/database/data:/var/lib/mysql:rw,cached
+      - ./.docker/database/config:/etc/mysql/conf.d:rw,cached
     environment:
       - MYSQL_DATABASE=laravel
       - MYSQL_USER=root
@@ -52,7 +54,7 @@ services:
     image: redis:alpine
     container_name: redis
     volumes:
-      - ./redis:/data:rw,cached
+      - ./.docker/redis:/data:rw,cached
     expose:
       - "6379"
     ports:
