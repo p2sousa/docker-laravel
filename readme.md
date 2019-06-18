@@ -25,6 +25,19 @@ depois verifique se os containers subiram:
 $ docker-compose ps
 ```
 
+depois crie o arquivo .env com base no .env.example:
+
+```
+$ cp .env.example .env
+```
+
+depois entre no container app e rode o `composer install`:
+
+```
+$ docker exec -it app bash
+$ composer install
+```
+
 O projeto estará rodando em: [http://localhost:8000/](http://localhost:8000/).
 
 ## DockerHub

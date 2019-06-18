@@ -53,7 +53,6 @@ WORKDIR $APP
 COPY . $APP/
 
 # RUN cp .env.example .env
-
 # ENV DB_HOST=db
 # ENV DB_DATABASE=$MYSQL_DATABASE
 # ENV DB_USERNAME=$MYSQL_USER
@@ -65,14 +64,11 @@ USER root
 RUN chown -R appuser:www-data $HOME/*
 
 RUN chown -R appuser:www-data $APP/* \
-    && chmod -R 775 $APP/public
-
-# RUN chmod -R 775 $HOME
+  && chmod -R 775 $APP/public
 
 # RUN composer install
 
 USER appuser
-
 VOLUME $APP
 
 ENTRYPOINT ["php-fpm"]
