@@ -13,7 +13,7 @@ Configure um ambiente de desenvolvimento com Laravel utilizando:
 
 ## Entrega
 
-### Docker-compose
+## Ambiente de desenvolvimento com docker-compose
 
 Para executar o projeto clone esse repositorio e em seguida rode:
 ```
@@ -25,26 +25,18 @@ depois verifique se os containers subiram:
 $ docker-compose ps
 ```
 
-depois crie o arquivo .env com base no .env.example:
-
-```
-$ cp .env.example .env
-```
-
-depois entre no container app e rode o `composer install`:
+depois entre no container app e rode o `composer install` e `php artisan migrate`:
 
 ```
 $ docker exec -it app bash
 $ composer install
+$ php artisan migrate
 ```
 
 O projeto estará rodando em: [http://localhost:8000/](http://localhost:8000/).
 
-## DockerHub
+## Ambiente de produçao com DockerHub
 
 Foram geradas imagens dos container, que estão disponiceis em: 
 
 - **[app](https://hub.docker.com/r/p2sousa/laravel-app)**
-- **[nginx](https://hub.docker.com/r/p2sousa/laravel-nginx)**
-- **[db](https://hub.docker.com/r/p2sousa/laravel-db)**
-- **[redis](https://hub.docker.com/r/p2sousa/laravel-redis)**
