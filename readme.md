@@ -19,17 +19,17 @@ Para executar o projeto clone esse repositorio e em seguida rode:
 ```
 $ docker-compose up -d
 ```
+
+Obs:. Ao rodar o `docker-composer up -d` o container
+ `app` ira automaticamente rodar o 
+ `composer install`, 
+ `php artisan key:generate`, 
+ `php artisan migrate`.
+
 depois verifique se os containers subiram:
 
 ```
 $ docker-compose ps
-```
-
-depois entre no container app e rode o `composer install`:
-
-```
-$ docker exec -it app bash
-$ composer install
 ```
 
 O projeto estará rodando em: [http://localhost:8000/](http://localhost:8000/).
