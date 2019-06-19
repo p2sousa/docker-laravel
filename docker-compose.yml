@@ -5,15 +5,15 @@ services:
   app:
     build: .
     container_name: app
-    expose:
-      - "9000"
     ports:
       - "9000"
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 60s ./.docker/entrypoint.sh
     volumes:
       - .:/var/www:rw,cached
       - ./.docker/php/log:/var/log:rw,cached
     depends_on:
       - db
+      - redis
     networks:
       - app-network
 
@@ -27,39 +27,38 @@ services:
     volumes:
       - .:/var/www
       - ./.docker/nginx/log:/var/log/nginx:rw,cached
+    depends_on:
+      - app
     networks:
       - app-network
 
   db:
     image: mysql:5.7
+    command: --innodb-use-native-aio=0
     container_name: db
+    tty: true
+    restart: always
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./.docker/database/dumps:/dumps:rw,cached
       - ./.docker/database/data:/var/lib/mysql:rw,cached
       - ./.docker/database/config:/etc/mysql/conf.d:rw,cached
-    environment:
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-    tty: true
-    restart: always
     networks:
       - app-network
 
   redis:
     image: redis:alpine
     container_name: redis
-    volumes:
-      - ./.docker/redis:/data:rw,cached
-    expose:
-      - "6379"
+    restart: always
     ports:
       - "6379:6379"
-    restart: always
+    volumes:
+      - ./.docker/redis:/data:rw,cached
     networks:
       - app-network
 
