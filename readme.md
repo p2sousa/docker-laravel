@@ -25,12 +25,11 @@ depois verifique se os containers subiram:
 $ docker-compose ps
 ```
 
-depois entre no container app e rode o `composer install` e `php artisan migrate`:
+depois entre no container app e rode o `composer install`:
 
 ```
 $ docker exec -it app bash
 $ composer install
-$ php artisan migrate
 ```
 
 O projeto estará rodando em: [http://localhost:8000/](http://localhost:8000/).
