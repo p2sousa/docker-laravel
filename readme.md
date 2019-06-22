@@ -9,11 +9,11 @@ Configure um ambiente de desenvolvimento com Laravel utilizando:
 - Nginx.
 - PHP-FPM.
 - Redis.
-- Redis
+- Mysql.
 
 ## Entrega
 
-## Ambiente de desenvolvimento com docker-compose
+## Etapa 1 com docker-compose
 
 Para executar o projeto clone esse repositorio e em seguida rode:
 ```
@@ -34,8 +34,22 @@ $ docker-compose ps
 
 O projeto estará rodando em: [http://localhost:8000/](http://localhost:8000/).
 
-## Ambiente de produçao com DockerHub
+## Etapa 2 com DockerHub
 
 Foram geradas imagens dos container, que estão disponiceis em: 
 
 - **[app](https://hub.docker.com/r/p2sousa/laravel-app)**
+
+
+#### Desafio Docker
+
+## Etapa 1 - Dockerizer
+
+Adicionar templates Dockerizer para ajustar as configurações do nginx.
+
+
+## Etapa 2 - DockerHub imagem Go.
+
+ Imagem Go 2mb
+ 
+ - **[p2sousa/codeeducation](https://hub.docker.com/r/p2sousa/codeeducation)**
