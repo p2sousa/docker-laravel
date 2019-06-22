@@ -24,10 +24,14 @@ services:
   nginx:
     build: ./.docker/nginx
     container_name: nginx
+    entrypoint: dockerize -template ./.docker/nginx/nginx.tmpl:/etc/nginx/conf.d/nginx.conf -wait tcp://app:9000 nginx -g "daemon off;"
     restart: always
     tty: true
     ports:
       - "8000:80"
+    environment:
+      - NGINX_HOST=app
+      - NGINX_PORT=9000
     volumes:
       - .:/var/www
       - ./.docker/nginx/log:/var/log/nginx:rw,cached
