@@ -1,5 +1,25 @@
 steps:
 
   - id: "Executando docker-compose"
-    name: "gcr.io/$PROJECT_ID/docker-compose"
-    args: ["-f","docker-compose.cloudbuild.yml","up","-d"]
+    name: "gcr.io/$PROJECT_ID/docker-compose:1.24.0"
+    args: ["-f", "docker-compose.cloudbuild.yml", "up", "-d"]
+
+  - id: "Executando composer"
+    name: "gcr.io/$PROJECT_ID/docker"
+    args: ["exec", "-t", "app", "composer", "install"]
+
+  - id: "Copiando .env"
+    name: "gcr.io/$PROJECT_ID/docker"
+    args: ["exec", "-t", "app", "cp", ".env.example", ".env"]
+
+  - id: "Executando key:generate"
+    name: "gcr.io/$PROJECT_ID/docker"
+    args: ["exec", "-t", "app", "php", "/var/www/artisan", "key:generate"]
+
+  - id: "Executando migrate"
+    name: "gcr.io/$PROJECT_ID/docker"
+    args: ["exec", "-t", "app", "php", "/var/www/artisan", "migrate"]
+
+  - id: "Executando phpunit"
+    name: "gcr.io/$PROJECT_ID/docker"
+    args: ["exec", "-t", "app", "php", "/var/www/vendor/bin/phpunit", "-c", "/var/www/phpunit.xml"]
