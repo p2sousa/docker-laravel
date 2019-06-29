@@ -6,6 +6,6 @@
  devera ser printado a seguinte mensagem: Code.education Rocks!
 
 
-### Imagem Go com 760 kb
+### Imagem GoLang com 760 kb
 
  - **[p2sousa/codeeducation](https://hub.docker.com/r/p2sousa/codeeducation)**
