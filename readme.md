@@ -7,5 +7,9 @@
 
 #### Modulo DevOps - CI
 
-1. :black_square_button: - [Exercicio Processo de CI](https://github.com/p2sousa/docker-laravel/blob/master/exercicio3.md)
-2. :black_square_button: - Desafio de CI
+1. :white_check_mark: - [Exercicio Processo de CI](https://github.com/p2sousa/docker-laravel/blob/master/exercicio3.md)
+2. :white_check_mark: - Desafio de CI
+
+#### Modulo DevOps - CD
+
+1. :black_square_button: - Exercicio CD
