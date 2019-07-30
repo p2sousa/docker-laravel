@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  nginx.conf: |
+    server {
+      listen 80;
+      index index.php index.html;
+      root /usr/share/nginx/html;
+
+      client_max_body_size 512M;
+
+      proxy_buffering off;
+
+      fastcgi_keep_conn on;
+      fastcgi_buffer_size 1k;
+      fastcgi_buffers 128 1k;
+      fastcgi_max_temp_file_size 0;
+
+      error_log /var/log/nginx/app_error.log;
+      access_log /var/log/nginx/app_access.log;
+
+      location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        fastcgi_pass app-service:9000;
+        fastcgi_index index.php;
+
+        include /etc/nginx/fastcgi_params;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+      }
+
+      location / {
+        try_files $uri $uri/ /index.php?$args;
+        gzip_static on;
+      }
+    }
+  nginx.index: |
+    <b>Code.education Rocks!</b>
