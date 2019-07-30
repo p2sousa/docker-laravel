@@ -37,5 +37,3 @@ data:
         gzip_static on;
       }
     }
-  nginx.index: |
-    <b>Code.education Rocks!</b>
