@@ -39,7 +39,7 @@ spec:
       volumes:
         - name: app-conf
           configMap:
-            name: nginx-conf
+            name: app-conf
             items:
               - key: env
                 path: .env
