@@ -12,4 +12,4 @@
 
 #### Modulo DevOps - CD
 
-1. :black_square_button: - Exercicio CD
+1. :white_check_mark: - Exercicio CD
